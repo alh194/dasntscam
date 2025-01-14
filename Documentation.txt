@@ -1,0 +1,44 @@
+Pequeño orientativo de las diferentes clases, su funcionamiento y explicación:
+
+- Paquete Auth
+
+AuthController:
+
+Controller encargado de la filtración de peticiones públicas, en un futuro se solicitará usuario y contraseña y devolverá
+un JWT al usuario para posteriormente realizar peticiones privadas
+
+AuthService:
+
+Service encargado de gestionar las peticiones register y login al controller
+
+LoginRequest:
+
+Objeto request personalizado para el login con usuario y contraseña
+
+RegisterRequest:
+
+Objeto request personalizado para el registro con varios campos
+
+AuthResponse:
+
+Objeto response, que será devuelto tras el registro o el login con el JWT
+
+
+SecurityConfig:
+
+Por defecto todos los enpoints están protegidos por spring, esta clase se ocupa de gestionar dichos enpoints y permitir
+enpoints publicos para registro o login.
+
+Al usar JWT, necesitamos deshabilidar la proteccion CSRF que viene por defecto
+
+
+DemoController:
+
+Controller privado de pruebas, actualmente no deja pasar peticiones ya que es privado y necesitaria un JWT junto a la
+peticion de usuario
+
+
+JwtAuthenticationFilter:
+
+Filtro para gestionar los JWT de las peticiones, extiende de OncePerRequestFilter para crear filtros personalizados
+

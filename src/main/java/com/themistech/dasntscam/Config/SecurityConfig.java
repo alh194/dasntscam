@@ -16,7 +16,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+        //Deshabilitar la autenticacion por defecto de csrf y gestionar endpoints publicos y privados
         return http
                 .csrf(csrf ->
                         csrf.disable())
