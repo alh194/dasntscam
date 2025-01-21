@@ -24,6 +24,8 @@ AuthResponse:
 Objeto response, que será devuelto tras el registro o el login con el JWT
 
 
+- Paquete Config
+
 SecurityConfig:
 
 Por defecto todos los enpoints están protegidos por spring, esta clase se ocupa de gestionar dichos enpoints y permitir
@@ -32,13 +34,34 @@ enpoints publicos para registro o login.
 Al usar JWT, necesitamos deshabilidar la proteccion CSRF que viene por defecto
 
 
+- Paquete Demo
+
 DemoController:
 
 Controller privado de pruebas, actualmente no deja pasar peticiones ya que es privado y necesitaria un JWT junto a la
 peticion de usuario
 
 
+- Paquete Jwt
+
 JwtAuthenticationFilter:
 
 Filtro para gestionar los JWT de las peticiones, extiende de OncePerRequestFilter para crear filtros personalizados
+
+
+- Paquete User
+
+User:
+
+Clase entity de user, por ahora aprovechamos getAuthorities para devolver el rol, el resto true ya que la expiración
+de cuenta será por JWT
+
+UserRepository:
+
+Interfaz de JPA (Java Persistence API) para el user
+
+Role:
+
+Enum para roles a nivel de aplicacion
+
 

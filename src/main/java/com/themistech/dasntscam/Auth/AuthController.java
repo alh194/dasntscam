@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
 //Estos son los enpoints publicos, donde cualquiera puede realizar una peticion
 public class AuthController {
 
