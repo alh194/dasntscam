@@ -1,4 +1,4 @@
-package com.themistech.dasntscam.Aws;
+package com.themistech.dasntscam.aws;
 
 import java.io.File;
 import java.io.FileOutputStream;

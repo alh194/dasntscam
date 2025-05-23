@@ -1,4 +1,4 @@
-package com.themistech.dasntscam.Demo;
+package com.themistech.dasntscam.demo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

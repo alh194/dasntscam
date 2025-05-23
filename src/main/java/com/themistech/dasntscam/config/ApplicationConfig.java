@@ -1,6 +1,6 @@
-package com.themistech.dasntscam.Config;
+package com.themistech.dasntscam.config;
 
-import com.themistech.dasntscam.User.UserRepository;
+import com.themistech.dasntscam.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,7 +46,7 @@ public class ApplicationConfig {
     //Recuperar usuario existente
     @Bean
     public UserDetailsService userDetailService() {
-        return username -> userRepository.findByUsername(username)
+        return username -> userRepository.findByNombre(username)
                 .orElseThrow(()-> new UsernameNotFoundException("User not found"));
     }
 

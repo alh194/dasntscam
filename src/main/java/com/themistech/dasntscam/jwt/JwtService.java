@@ -1,4 +1,4 @@
-package com.themistech.dasntscam.Jwt;
+package com.themistech.dasntscam.jwt;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;

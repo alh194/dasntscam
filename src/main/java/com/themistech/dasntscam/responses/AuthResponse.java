@@ -1,4 +1,4 @@
-package com.themistech.dasntscam.Auth;
+package com.themistech.dasntscam.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 
-public class LoginRequest {
-    String username;
-    String password;
+public class AuthResponse {
+    String token;
 }

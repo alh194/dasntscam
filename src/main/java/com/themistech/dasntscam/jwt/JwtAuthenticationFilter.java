@@ -1,4 +1,4 @@
-package com.themistech.dasntscam.Jwt;
+package com.themistech.dasntscam.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

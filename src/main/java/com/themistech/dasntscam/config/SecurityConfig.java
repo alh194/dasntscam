@@ -1,6 +1,6 @@
-package com.themistech.dasntscam.Config;
+package com.themistech.dasntscam.config;
 
-import com.themistech.dasntscam.Jwt.JwtAuthenticationFilter;
+import com.themistech.dasntscam.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
