@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class PartialRegisterRequest {
-    String email;
-    String password; //TODO quizás hacer encode en el front para evitar snifers
+    private String correoElectronico;
+    private String password; //TODO quizás hacer encode en el front para evitar snifers
 }

@@ -4,11 +4,9 @@ import com.themistech.dasntscam.requests.LoginRequest;
 import com.themistech.dasntscam.requests.PartialRegisterRequest;
 import com.themistech.dasntscam.requests.RegisterRequest;
 import com.themistech.dasntscam.responses.AuthResponse;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -26,8 +24,8 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(request));
     }
 
-    @PostMapping(value = "register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+    @PostMapping(value = "register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<AuthResponse> register(@ModelAttribute RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
 

@@ -46,7 +46,7 @@ public class ApplicationConfig {
     //Recuperar usuario existente
     @Bean
     public UserDetailsService userDetailService() {
-        return username -> userRepository.findByNombre(username)
+        return username -> userRepository.findByCorreoElectronico(username)
                 .orElseThrow(()-> new UsernameNotFoundException("User not found"));
     }
 

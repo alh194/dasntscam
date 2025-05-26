@@ -28,8 +28,8 @@ public class AuthService {
 
     //Metodo de login, devuelve el token
     public AuthResponse login(LoginRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user=userRepository.findByNombre(request.getUsername()).orElseThrow();
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getCorreoElectronico(), request.getPassword()));
+        UserDetails user=userRepository.findByCorreoElectronico(request.getCorreoElectronico()).orElseThrow();
         String token=jwtService.getToken(user);
         return AuthResponse.builder()
                 .token(token)
@@ -67,7 +67,7 @@ public class AuthService {
     public AuthResponse partialRegister(PartialRegisterRequest request) {
         //Creo el user
         User user = User.builder()
-                .correoElectronico(request.getEmail())
+                .correoElectronico(request.getCorreoElectronico())
                 .rol(Rol.cliente)
                 .contrasenaHash(passwordEncoder.encode(request.getPassword()))
                 .fechaCreacion(new Timestamp(System.currentTimeMillis()))
