@@ -2,6 +2,7 @@ package com.themistech.dasntscam.aws;
 
 import java.util.List;
 
+import com.themistech.dasntscam.responses.VideoListResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -29,9 +30,9 @@ public class AwsS3Controller {
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/list")
-    public ResponseEntity<List<String>> listFiles() {
-        return new ResponseEntity<List<String>>(awsS3Service.getObjectsFromS3(), HttpStatus.OK);
+    @GetMapping(value = "/videoList")
+    public ResponseEntity<VideoListResponse> listFiles() {
+        return new ResponseEntity<VideoListResponse>(awsS3Service.getVideoList(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/download")

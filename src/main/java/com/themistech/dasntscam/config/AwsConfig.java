@@ -23,6 +23,7 @@ public class AwsConfig {
     @Value("${aws.s3.region}")
     private String region;
 
+    //En un futuro si se quiere usar diferentes buckets, usar esta configuracion modificando los valores accessKeyId, accessSecretKey y region en application.properties
     @Bean
     public AmazonS3 getS3Client() {
 

@@ -33,4 +33,9 @@ public class AuthController {
     public ResponseEntity<AuthResponse> partialRegister(@RequestBody PartialRegisterRequest request) {
         return ResponseEntity.ok(authService.partialRegister(request));
     }
+
+    @PostMapping(value = "checkUser")
+    public ResponseEntity<AuthResponse> checkUser(@RequestBody PartialRegisterRequest request) {
+        return ResponseEntity.ok(authService.checkUser(request));
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -78,5 +79,16 @@ public class AuthService {
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
                 .build();
+    }
+
+    public AuthResponse checkUser(PartialRegisterRequest request) {
+        Optional<User> user = null;
+        user = userRepository.findByCorreoElectronico(request.getCorreoElectronico());
+        if(user != null){
+            //Devolvemos el response personalizado con el token
+            return null; //Devolver que el user no existe y puede continuar
+        } else {
+            return null;//Devolver error
+        }
     }
 }
