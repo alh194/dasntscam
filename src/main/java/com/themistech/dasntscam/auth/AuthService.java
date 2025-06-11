@@ -7,7 +7,9 @@ import com.themistech.dasntscam.repositories.UserRepository;
 import com.themistech.dasntscam.requests.LoginRequest;
 import com.themistech.dasntscam.requests.PartialRegisterRequest;
 import com.themistech.dasntscam.requests.RegisterRequest;
+import com.themistech.dasntscam.requests.TokenRequest;
 import com.themistech.dasntscam.responses.AuthResponse;
+import com.themistech.dasntscam.responses.RoleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,7 +55,7 @@ public class AuthService {
                 .localidad(request.getLocalidad())
                 .municipio(request.getMunicipio())
                 .codigoPostal(request.getCodigoPostal())
-                .rol(request.getRol())
+                .rol(Rol.perito)
                 .contrasenaHash(passwordEncoder.encode(request.getPassword()))
                 .fechaCreacion(new Timestamp(System.currentTimeMillis()))
                 .build();
@@ -81,14 +83,12 @@ public class AuthService {
                 .build();
     }
 
-    public AuthResponse checkUser(PartialRegisterRequest request) {
-        Optional<User> user = null;
-        user = userRepository.findByCorreoElectronico(request.getCorreoElectronico());
-        if(user != null){
-            //Devolvemos el response personalizado con el token
-            return null; //Devolver que el user no existe y puede continuar
-        } else {
-            return null;//Devolver error
-        }
+    //Recuperar el rol con el token
+    public RoleResponse getUserRoleWithToken(TokenRequest request) {
+        String userName = jwtService.getUsernameFromToken(request.getToken());
+        User user = userRepository.findByCorreoElectronico(userName).orElseThrow();
+        return RoleResponse.builder()
+                .StringRole(String.valueOf(user.getRol()))
+                .build();
     }
 }
