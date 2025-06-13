@@ -37,7 +37,7 @@ public class AuthController {
     }
     //Mirar el rol con el token
     @GetMapping(value = "getUserRoleWithToken")
-    public ResponseEntity<RoleResponse> checkUser(@RequestBody TokenRequest request) {
-        return ResponseEntity.ok(authService.getUserRoleWithToken(request));
+    public ResponseEntity<RoleResponse> checkUser(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(authService.getUserRoleWithToken(token));
     }
 }

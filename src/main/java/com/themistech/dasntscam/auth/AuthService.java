@@ -32,7 +32,7 @@ public class AuthService {
     //Metodo de login, devuelve el token
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getCorreoElectronico(), request.getPassword()));
-        UserDetails user=userRepository.findByCorreoElectronico(request.getCorreoElectronico()).orElseThrow();
+        User user=userRepository.findByCorreoElectronico(request.getCorreoElectronico()).orElseThrow();
         String token=jwtService.getToken(user);
         return AuthResponse.builder()
                 .token(token)
@@ -84,8 +84,8 @@ public class AuthService {
     }
 
     //Recuperar el rol con el token
-    public RoleResponse getUserRoleWithToken(TokenRequest request) {
-        String userName = jwtService.getUsernameFromToken(request.getToken());
+    public RoleResponse getUserRoleWithToken(String token) {
+        String userName = jwtService.getUsernameFromToken(token);
         User user = userRepository.findByCorreoElectronico(userName).orElseThrow();
         return RoleResponse.builder()
                 .StringRole(String.valueOf(user.getRol()))
