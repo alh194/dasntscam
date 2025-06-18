@@ -1,5 +1,7 @@
 package com.themistech.dasntscam.entities;
 
+import com.themistech.dasntscam.enums.Rol;
+import com.themistech.dasntscam.enums.Sexo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

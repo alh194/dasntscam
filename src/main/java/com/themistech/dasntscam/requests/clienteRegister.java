@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 
-//TODO considerar borrarlo
-public class TokenRequest {
-    String token;
+public class clienteRegister {
+    private String correoElectronico;
+    private String password; //TODO quizás hacer encode en el front para evitar snifers
 }

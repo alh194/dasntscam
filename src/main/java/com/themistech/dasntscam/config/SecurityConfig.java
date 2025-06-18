@@ -30,7 +30,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 //Endpoins publicos
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/auth/**", "/dameUnVideoPls/**", "/s3/**").permitAll()
+                                .requestMatchers("/auth/**", "/dameUnVideoPls/**", "/s3/**", "/issues/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 //Autenticacion por JWT

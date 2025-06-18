@@ -3,6 +3,8 @@ package com.themistech.dasntscam.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,4 +27,9 @@ public class Cliente {
 
     @Column(name = "poliza_seguro", length = 30, nullable = false)
     private String polizaSeguro;
+
+    // Relación con Issue
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Issue> issues;
 }

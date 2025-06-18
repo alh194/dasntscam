@@ -1,9 +1,8 @@
 package com.themistech.dasntscam.auth;
 
 import com.themistech.dasntscam.requests.LoginRequest;
-import com.themistech.dasntscam.requests.PartialRegisterRequest;
-import com.themistech.dasntscam.requests.RegisterRequest;
-import com.themistech.dasntscam.requests.TokenRequest;
+import com.themistech.dasntscam.requests.clienteRegister;
+import com.themistech.dasntscam.requests.pertioRegister;
 import com.themistech.dasntscam.responses.AuthResponse;
 import com.themistech.dasntscam.responses.RoleResponse;
 import org.springframework.http.MediaType;
@@ -26,14 +25,14 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(request));
     }
     //Registro de perito
-    @PostMapping(value = "register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<AuthResponse> register(@ModelAttribute RegisterRequest request) {
-        return ResponseEntity.ok(authService.register(request));
+    @PostMapping(value = "pertioRegister", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<AuthResponse> pertioRegister(@ModelAttribute pertioRegister request) {
+        return ResponseEntity.ok(authService.pertioRegister(request));
     }
     //Registro de cliente
-    @PostMapping(value = "partialRegister")
-    public ResponseEntity<AuthResponse> partialRegister(@RequestBody PartialRegisterRequest request) {
-        return ResponseEntity.ok(authService.partialRegister(request));
+    @PostMapping(value = "clienteRegister")
+    public ResponseEntity<AuthResponse> clienteRegister(@RequestBody clienteRegister request) {
+        return ResponseEntity.ok(authService.clienteRegister(request));
     }
     //Mirar el rol con el token
     @GetMapping(value = "getUserRoleWithToken")

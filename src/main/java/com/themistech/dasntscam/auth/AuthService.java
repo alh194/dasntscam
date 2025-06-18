@@ -1,30 +1,33 @@
 package com.themistech.dasntscam.auth;
 
-import com.themistech.dasntscam.entities.Rol;
+import com.themistech.dasntscam.entities.Cliente;
+import com.themistech.dasntscam.entities.Perito;
+import com.themistech.dasntscam.enums.Rol;
 import com.themistech.dasntscam.jwt.JwtService;
 import com.themistech.dasntscam.entities.User;
+import com.themistech.dasntscam.repositories.ClienteRepository;
+import com.themistech.dasntscam.repositories.PeritoRepository;
 import com.themistech.dasntscam.repositories.UserRepository;
 import com.themistech.dasntscam.requests.LoginRequest;
-import com.themistech.dasntscam.requests.PartialRegisterRequest;
-import com.themistech.dasntscam.requests.RegisterRequest;
-import com.themistech.dasntscam.requests.TokenRequest;
+import com.themistech.dasntscam.requests.clienteRegister;
+import com.themistech.dasntscam.requests.pertioRegister;
 import com.themistech.dasntscam.responses.AuthResponse;
 import com.themistech.dasntscam.responses.RoleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final ClienteRepository clienteRepository;
+    private final PeritoRepository peritoRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -40,7 +43,7 @@ public class AuthService {
     }
 
     //Metodo de registro completo, devuelve el token
-    public AuthResponse register(RegisterRequest request) {
+    public AuthResponse pertioRegister(pertioRegister request) {
         //Creo el user
         User user = User.builder()
                 .nombre(request.getNombre())
@@ -61,13 +64,22 @@ public class AuthService {
                 .build();
 
         userRepository.save(user);
+
+        //Creamos en la tabla perito el registro correspondiente
+        Perito perito = new Perito();
+        perito.setUsuario(user);
+        perito.setCodigoRegistro("CodigoRegistroDummy");//TODO OJO ESTO ES TEMPORAL, esta por ver cuando se cumplimenta esta informacion, si en el registro o despues
+        perito.setColegioProfesional("ColegioProfesionalDummy");
+        perito.setNumeroColegiado("NumeroColegiadoDummy");
+        peritoRepository.save(perito);
+
         //Devolvemos el response personalizado con el token
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
                 .build();
     }
 
-    public AuthResponse partialRegister(PartialRegisterRequest request) {
+    public AuthResponse clienteRegister(clienteRegister request) {
         //Creo el user
         User user = User.builder()
                 .correoElectronico(request.getCorreoElectronico())
@@ -77,6 +89,13 @@ public class AuthService {
                 .build();
         userRepository.save(user);
 
+        //Creamos en la tabla cliente el registro correspondiente
+        Cliente cliente = new Cliente();
+        cliente.setUsuario(user);
+        cliente.setLibroVerde("LibroVerdeDummy");//TODO OJO ESTO ES TEMPORAL, esta por ver cuando se cumplimenta esta informacion, si en el registro o despues
+        cliente.setPolizaSeguro("PolizaSeguroDummy");
+        clienteRepository.save(cliente);
+
         //Devolvemos el response personalizado con el token
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
@@ -85,10 +104,15 @@ public class AuthService {
 
     //Recuperar el rol con el token
     public RoleResponse getUserRoleWithToken(String token) {
-        String userName = jwtService.getUsernameFromToken(token);
-        User user = userRepository.findByCorreoElectronico(userName).orElseThrow();
+        User user = getUserWithToken(token);
         return RoleResponse.builder()
                 .StringRole(String.valueOf(user.getRol()))
                 .build();
+    }
+
+    //Recuperar el usuario a partir del rol
+    public User getUserWithToken(String token) {
+        String userName = jwtService.getUsernameFromToken(token);
+        return userRepository.findByCorreoElectronico(userName).orElseThrow();
     }
 }

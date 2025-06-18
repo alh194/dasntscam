@@ -1,9 +1,9 @@
---Cimientos, utf-8 para caracteres especiales
+-- Cimientos, utf-8 para caracteres especiales
 CREATE DATABASE IF NOT EXISTS dasntscam
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
---Tabla usuarios
+-- Tabla usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---Tabla peritos
+-- Tabla peritos
 CREATE TABLE IF NOT EXISTS peritos (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT UNSIGNED NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS peritos (
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---Tabla clientes
+-- Tabla clientes
 CREATE TABLE IF NOT EXISTS clientes (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT UNSIGNED NOT NULL,
@@ -58,11 +58,42 @@ CREATE TABLE IF NOT EXISTS clientes (
         FOREIGN KEY (id_usuario)
         REFERENCES usuarios(id)
         ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- Tabla Issues
+CREATE TABLE IF NOT EXISTS issues (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    video_id VARCHAR(100),
 
---Tabla admin
+    estado ENUM(
+        'SIN_ASIGNAR',
+        'ASIGNACION',
+        'PROVISION_DE_FONDOS',
+        'EVALUACION',
+        'INFORME'
+    ) NOT NULL,
+
+    nombre VARCHAR(100),
+    descripcion TEXT,
+
+    cliente_id INT UNSIGNED NOT NULL,
+    perito_id INT UNSIGNED,
+
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_issue_cliente
+        FOREIGN KEY (cliente_id)
+        REFERENCES clientes(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_issue_perito
+        FOREIGN KEY (perito_id)
+        REFERENCES peritos(id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- Tabla admin
 CREATE TABLE IF NOT EXISTS admins (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT UNSIGNED NOT NULL,
@@ -73,6 +104,4 @@ CREATE TABLE IF NOT EXISTS admins (
         FOREIGN KEY (id_usuario)
         REFERENCES usuarios(id)
         ON DELETE CASCADE
-
-)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

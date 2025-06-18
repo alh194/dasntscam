@@ -1,7 +1,7 @@
 package com.themistech.dasntscam.requests;
 
-import com.themistech.dasntscam.entities.Rol;
-import com.themistech.dasntscam.entities.Sexo;
+import com.themistech.dasntscam.enums.Rol;
+import com.themistech.dasntscam.enums.Sexo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class RegisterRequest {
+public class pertioRegister {
     private String nombre;
     private String apellido1;
     private String apellido2;

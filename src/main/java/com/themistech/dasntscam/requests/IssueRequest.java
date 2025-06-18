@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class PartialRegisterRequest {
-    private String correoElectronico;
-    private String password; //TODO quizás hacer encode en el front para evitar snifers
+public class IssueRequest {
+    String videoId;
+    String nombre;
+    String descripcion;
 }

@@ -1,4 +1,4 @@
-package com.themistech.dasntscam.entities;
+package com.themistech.dasntscam.enums;
 
 public enum Rol {
     cliente,

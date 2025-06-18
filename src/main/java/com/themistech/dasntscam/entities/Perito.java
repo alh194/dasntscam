@@ -1,10 +1,9 @@
 package com.themistech.dasntscam.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -35,4 +34,9 @@ public class Perito {
     @Lob
     @Column(name = "cv", columnDefinition = "LONGBLOB")
     private byte[] cv;
+
+    // Relación con Issue
+    @OneToMany(mappedBy = "perito", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Issue> issues;
 }
