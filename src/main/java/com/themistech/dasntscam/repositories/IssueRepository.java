@@ -2,6 +2,7 @@ package com.themistech.dasntscam.repositories;
 
 import com.themistech.dasntscam.entities.Issue;
 import com.themistech.dasntscam.entities.User;
+import com.themistech.dasntscam.enums.IssueStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +19,6 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
     WHERE c.usuario = :user OR p.usuario = :user
 """)
     List<Issue> findAllByUsuario(@Param("user") User user);
+
+    List<Issue> findByEstado(IssueStatus estado);
 }

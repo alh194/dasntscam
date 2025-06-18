@@ -14,4 +14,7 @@ public interface IssuesService {
 
     void createIssue(IssueRequest issueRequest, User user);
 
+    List<Issue> getAllIssuesListOfUser(User user);
+
+    List<Issue> getAllIssuesUnassignedList(User user);
 }
