@@ -24,6 +24,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        // Skips filtering for any GET under /api/pdf/
+        if (path.startsWith("/api/pdf/")) {
+            return true;
+        }
+        // Si tienes más endpoints públicos, añádelos aquí:
+        // if (path.startsWith("/auth/") || path.startsWith("/issues/")) return true;
+
+        return false;
+    }
+
     //Filtros relacionados con el token
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

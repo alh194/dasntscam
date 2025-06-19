@@ -1,0 +1,72 @@
+/* report.css */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 2cm;
+  color: #333;
+}
+header {
+  text-align: center;
+  margin-bottom: 1cm;
+  border-bottom: 1px solid #666;
+  padding-bottom: 0.5cm;
+}
+header h1 {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 0;
+}
+header p {
+  font-size: 12px;
+  margin: 0.2cm 0 0;
+}
+
+h2 {
+  font-size: 18px;
+  margin-top: 1cm;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 0.2cm;
+}
+h3 {
+  font-size: 16px;
+  margin-top: 0.7cm;
+}
+h4 {
+  font-size: 14px;
+  margin-top: 0.5cm;
+}
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.two-columns > div {
+  width: 48%;
+}
+
+.index {
+  list-style: none;
+  padding-left: 0;
+}
+.index ul {
+  list-style: none;
+  padding-left: 1cm;
+}
+.index li {
+  margin-bottom: 0.2cm;
+  font-size: 12px;
+}
+
+section {
+  page-break-inside: avoid;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #666;
+  padding-top: 0.5cm;
+  font-size: 10px;
+  text-align: right;
+  color: #666;
+}
