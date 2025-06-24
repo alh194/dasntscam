@@ -28,6 +28,7 @@ public class IssuesController {
                                               @RequestHeader("Authorization") String token )
     {
         try {
+            System.out.println("Token '" + token + "'");
             // Verificar si el token es válido
             User user = authService.getUserWithToken(token);
             if (user == null) {

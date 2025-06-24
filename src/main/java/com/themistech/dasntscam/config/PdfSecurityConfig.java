@@ -17,7 +17,7 @@ public class PdfSecurityConfig {
     @Order(1)  // Se evalúa antes que el resto
     public SecurityFilterChain pdfSecurityChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/api/pdf/**")     // Solo rutas que empiecen por /api/pdf/
+                .securityMatcher("/api/pdf/**", "/api/odt/**")     // Solo rutas de informes
                 .csrf(csrf -> csrf.disable())       // Sin CSRF aquí
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll()       // Permite TODO sin autenticar

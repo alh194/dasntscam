@@ -92,8 +92,8 @@ public class AuthService {
         //Creamos en la tabla cliente el registro correspondiente
         Cliente cliente = new Cliente();
         cliente.setUsuario(user);
-        cliente.setLibroVerde("LibroVerdeDummy");//TODO OJO ESTO ES TEMPORAL, esta por ver cuando se cumplimenta esta informacion, si en el registro o despues
-        cliente.setPolizaSeguro("PolizaSeguroDummy");
+        cliente.setLibroVerde("LibroVerdeDummy".getBytes());//TODO OJO ESTO ES TEMPORAL, esta por ver cuando se cumplimenta esta informacion, si en el registro o despues
+        cliente.setPolizaSeguro("PolizaSeguroDummy".getBytes());
         clienteRepository.save(cliente);
 
         //Devolvemos el response personalizado con el token

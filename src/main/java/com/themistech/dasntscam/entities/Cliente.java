@@ -23,10 +23,10 @@ public class Cliente {
     private User usuario;
 
     @Column(name = "libro_verde", length = 100, nullable = false)
-    private String libroVerde;
+    private byte[] libroVerde;
 
     @Column(name = "poliza_seguro", length = 30, nullable = false)
-    private String polizaSeguro;
+    private byte[] polizaSeguro;
 
     // Relación con Issue
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)

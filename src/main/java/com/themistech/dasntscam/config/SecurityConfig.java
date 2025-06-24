@@ -34,8 +34,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                 //Endpoins publicos
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers(HttpMethod.GET, "/api/pdf/**").permitAll()
-                                .requestMatchers("/auth/**", "/dameUnVideoPls/**", "/s3/**", "/issues/**").permitAll()
+                                //.requestMatchers(HttpMethod.GET, "/api/pdf/**").permitAll()
+                                .requestMatchers("/auth/**", "/dameUnVideoPls/**", "/s3/**", "/issues/**", "/file/**").permitAll()
                                 .requestMatchers("/error").permitAll()
                                 .anyRequest().authenticated()
                 )
@@ -54,7 +54,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173", "http://localhost:3000")
+                .allowedOrigins("http://localhost:5173", "http://localhost:3000", "http://localhost:8080")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);

@@ -32,6 +32,9 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     @Value("${aws.s3.bucket}")
     private String bucketName;
 
+    @Value("${aws.s3.bucket.vados}")
+    private String bucketVados;
+
     //Subir archivo
     @Override
     public void uploadFile(MultipartFile file) {
@@ -40,7 +43,7 @@ public class AwsS3ServiceImpl implements AwsS3Service{
             stream.write(file.getBytes());
             String newFileName = System.currentTimeMillis() + "_" + mainFile.getName();
             LOGGER.info("Subiendo archivo con el nombre... " + newFileName);
-            PutObjectRequest request = new PutObjectRequest(bucketName, newFileName, mainFile);
+            PutObjectRequest request = new PutObjectRequest(bucketVados, newFileName, mainFile);
             amazonS3.putObject(request);
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);

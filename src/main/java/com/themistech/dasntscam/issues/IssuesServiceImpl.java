@@ -3,6 +3,7 @@ package com.themistech.dasntscam.issues;
 import com.themistech.dasntscam.auth.AuthService;
 import com.themistech.dasntscam.entities.Issue;
 import com.themistech.dasntscam.entities.User;
+import com.themistech.dasntscam.entities.Cliente;
 import com.themistech.dasntscam.enums.IssueStatus;
 import com.themistech.dasntscam.enums.Rol;
 import com.themistech.dasntscam.repositories.IssueRepository;
@@ -46,12 +47,15 @@ public class IssuesServiceImpl implements IssuesService {
 
     @Override
     public void createIssue(IssueRequest issueRequest, User user) {
+        Cliente cliente = clienteRepository.findByUsuario(user)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
         Issue issue = new Issue();
         issue.setVideoId(issueRequest.getVideoId());
         issue.setEstado(IssueStatus.SIN_ASIGNAR);
         issue.setNombre(issueRequest.getNombre());
         issue.setDescripcion(issueRequest.getDescripcion());
-        issue.setCliente(clienteRepository.findByUsuario(user));
+        issue.setCliente(cliente);
         issue.setFechaCreacion(LocalDateTime.now());
         issueRepository.save(issue);
     }
